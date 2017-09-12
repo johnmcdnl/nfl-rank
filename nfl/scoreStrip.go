@@ -1,4 +1,4 @@
-package scraper
+package nfl
 
 type ScoreStrip struct {
 	GameWeek *GameWeek `xml:" ss,omitempty" json:"gameWeek,omitempty"`
@@ -15,7 +15,6 @@ type Games struct {
 	Games   []*Game `xml:" g,omitempty" json:"games,omitempty"`
 }
 
-
 type Game struct {
 	WeekDay         string `xml:" d,attr"  json:"weekDay,omitempty"`
 	EventID         string `xml:" eid,attr"  json:"eventID,omitempty"`
@@ -24,7 +23,7 @@ type Game struct {
 	GameType        string `xml:" gt,attr"  json:",omitempty"`
 	Home            string `xml:" h,attr"  json:",omitempty"`
 	HomeNickName    string `xml:" hnn,attr"  json:",omitempty"`
-	HomeScore       string `xml:" hs,attr"  json:",omitempty"`
+	HomeScore       int    `xml:" hs,attr"  json:",omitempty"`
 	k               string `xml:" k,attr"  json:",omitempty"`
 	p               string `xml:" p,attr"  json:",omitempty"`
 	q               string `xml:" q,attr"  json:",omitempty"`
@@ -32,8 +31,5 @@ type Game struct {
 	Time            string `xml:" t,attr"  json:",omitempty"`
 	Visitor         string `xml:" v,attr"  json:",omitempty"`
 	VisitorNickName string `xml:" vnn,attr"  json:",omitempty"`
-	VisitorScore    string `xml:" vs,attr"  json:",omitempty"`
+	VisitorScore    int    `xml:" vs,attr"  json:",omitempty"`
 }
-
-
-

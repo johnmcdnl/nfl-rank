@@ -1,4 +1,4 @@
-package scraper
+package nfl
 
 import (
 	"fmt"
@@ -20,29 +20,27 @@ const (
 	firstSeason = 1900
 	lastSeason  = 2016
 
-	firstWeek = 0
-	lastWeek  = 30
+	FirstWeek = 0
+	LastWeek  = 30
 
 	PreSeason     = "PRE"
 	RegularSeason = "REG"
 	PostSeason    = "POST"
 
-	scrapeDir = "./data"
+	scrapeDir = "./data/nfl"
 )
 
-func ScrapeAll() {
+func ScrapeAll() []*ScoreStrip {
 	urls := generateURLS()
 	downloadURLAndWriteToDisk(urls)
 	scoreStrips := scrapeFromDisk()
-	for _, ss := range scoreStrips {
-		fmt.Println(ss.GameWeek.Games.Season, ss.GameWeek.Games.Phase, ss.GameWeek.Games.WeekNum)
-	}
+	return scoreStrips
 }
 
 func generateURLS() []*url {
 	var urls []*url
 	for year := firstSeason; year <= lastSeason; year++ {
-		for week := firstWeek; week <= lastWeek; week++ {
+		for week := FirstWeek; week <= LastWeek; week++ {
 			urls = append(urls, generateURL(year, PreSeason, week))
 			urls = append(urls, generateURL(year, RegularSeason, week))
 			urls = append(urls, generateURL(year, PostSeason, week))
@@ -69,6 +67,8 @@ func scrapeFromDisk() []*ScoreStrip {
 
 		err = xml.Unmarshal(contents, scoreStrip.GameWeek)
 		if err != nil {
+			os.RemoveAll(path)
+			fmt.Println(path)
 			panic(err)
 		}
 		if scoreStrip.GameWeek == nil || scoreStrip.GameWeek.Games == nil {
@@ -103,10 +103,9 @@ func generateURL(year int, phase string, week int) *url {
 }
 
 func downloadURL(url *url) {
-	if url==nil{
+	if url == nil {
 		return
 	}
-
 
 	fmt.Println(url.path)
 	resp, err := http.Get(url.path)
