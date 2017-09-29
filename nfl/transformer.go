@@ -55,7 +55,7 @@ func addGameToSeason(season *sports.Season, game *Game, weekNum string) {
 }
 
 func addGameToPhase(season *sports.Season, phaseName string, game *Game, weekNum string) {
-	season.GetPhaseNamed(phaseName).GetGameWeekNamed(weekNum).NewMatch(&sports.Match{
+	season.GetPhaseNamed(phaseName).GetGameWeekNamed(weekNum, game.GameType).NewMatch(&sports.Match{
 		Name: game.EventID,
 		HomeTeam: &sports.Team{
 			Name:     game.Home,

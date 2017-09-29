@@ -1,9 +1,10 @@
 package sports
 
 type GameWeek struct {
-	ID      string
-	Name    string
-	Matches []*Match
+	ID       string
+	Name     string
+	GameType string
+	Matches  []*Match
 }
 
 func (week *GameWeek) NewMatch(match *Match) {
