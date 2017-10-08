@@ -2,8 +2,8 @@ package nfl
 
 import (
 	"github.com/johnmcdnl/nfl-rank/sports"
-	"github.com/johnmcdnl/nfl-rank/elo"
 	"fmt"
+	"github.com/johnmcdnl/elo"
 )
 
 const initialRating float64 = 1500
@@ -42,7 +42,7 @@ func GenerateELO(seasons []*sports.Season) {
 	}
 
 	for _, v := range rankings {
-		fmt.Println( v)
+		fmt.Println(v)
 	}
 }
 
@@ -77,9 +77,8 @@ func GenerateELOForMatch(match *sports.Match, kFactor float64, homeAdvantage flo
 		awayStartRank = initialRating
 	}
 
-	e := elo.New(homeStartRank, awayStartRank, elo.Result(match.Winner()), kFactor, homeAdvantage)
+	e, _ := elo.New(homeStartRank, awayStartRank, kFactor, elo.Win, elo.Loose)
 
-	e.Calculate()
-	rankings[match.HomeTeam.NickName] = e.NewP1()
-	rankings[match.AwayTeam.NickName] = e.NewP2()
+	rankings[match.HomeTeam.NickName] = e.RAN
+	rankings[match.AwayTeam.NickName] = e.RBN
 }
