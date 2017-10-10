@@ -3,6 +3,7 @@ package sports
 type Match struct {
 	ID              string
 	Name            string
+	IsCompleted     bool
 	HomeTeam        *Team
 	AwayTeam        *Team
 	WeightingFactor float64

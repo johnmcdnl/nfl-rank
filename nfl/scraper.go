@@ -91,12 +91,11 @@ func parseAll(dbCOnn *DB) []*ScoreStrip {
 					scoreStrips = append(scoreStrips, ss)
 				}
 
-				if week <= currentWeek {
-					ss := parse(dbCOnn, season, RegularSeason, week)
-					if ss.GameWeek.Games != nil {
-						scoreStrips = append(scoreStrips, ss)
-					}
+				ss = parse(dbCOnn, season, RegularSeason, week)
+				if ss.GameWeek.Games != nil {
+					scoreStrips = append(scoreStrips, ss)
 				}
+
 				continue
 			}
 			//ss := parse(dbCOnn, season, PreSeason, week)

@@ -6,6 +6,7 @@ import (
 	"github.com/johnmcdnl/elo"
 	"sort"
 	"strings"
+	"sync"
 )
 
 const initialRating float64 = 1500
@@ -14,9 +15,11 @@ const kFactor float64 = 60
 func CalculateELOForSeasons(seasons []*sports.Season) {
 	for _, season := range seasons {
 		for _, phase := range season.Phases {
-
 			for _, gameWeek := range phase.GameWeeks {
 				for _, match := range gameWeek.Matches {
+					if !match.IsCompleted {
+						continue
+					}
 					switch phase.Name {
 					case PreSeason:
 						match.WeightingFactor = 0.3
@@ -25,13 +28,46 @@ func CalculateELOForSeasons(seasons []*sports.Season) {
 					case PostSeason:
 						match.WeightingFactor = 1.2
 					}
-
 					CalculateELO(match)
 				}
 			}
 		}
 	}
 }
+
+func FuturePredictions(seasons []*sports.Season) {
+	nextWeekFound := false
+	for _, season := range seasons {
+		for _, phase := range season.Phases {
+			for _, gameWeek := range phase.GameWeeks {
+				for _, match := range gameWeek.Matches {
+					if match.IsCompleted {
+						continue
+					}
+					switch phase.Name {
+					case PreSeason:
+						match.WeightingFactor = 0.3
+					case RegularSeason:
+						match.WeightingFactor = 1.1
+					case PostSeason:
+						match.WeightingFactor = 1.2
+					}
+					once.Do(func(){
+						fmt.Printf("%s - %s - %s \n", season.Name, phase.Name, gameWeek.Name)
+					})
+					PredictWinner(match)
+					nextWeekFound = true
+				}
+				once = sync.Once{}
+				//if nextWeekFound {
+				//	return
+				//}
+			}
+		}
+	}
+}
+
+var once sync.Once
 
 func currentTeam(name string) bool {
 	switch strings.ToLower(name) {
@@ -116,4 +152,44 @@ func CalculateELO(match *sports.Match) {
 	rankings[match.HomeTeam.NickName] = result.RAN
 	rankings[match.AwayTeam.NickName] = result.RBN
 
+}
+
+func PredictWinner(match *sports.Match) {
+	homeRank := getCurrentRank(match.HomeTeam.NickName)
+	awayRank := getCurrentRank(match.AwayTeam.NickName)
+
+	result, err := elo.New(homeRank, awayRank, kFactor*match.WeightingFactor, elo.Win, elo.Loose)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("%2.0f%s \t %s %2.2f @ %2.2f %s \t %2.0f%s \n",
+		result.EB*100, "%",
+		PadLeft(match.AwayTeam.NickName, " ", 10),
+
+		100/(result.EB*100),
+		100/(result.EA*100),
+
+		PadRight(match.HomeTeam.NickName, " ", 10),
+		result.EA*100, "%",
+	)
+
+}
+
+func PadRight(str, pad string, lenght int) string {
+	for {
+		str += pad
+		if len(str) >= lenght {
+			return str[0:lenght]
+		}
+	}
+}
+
+func PadLeft(str, pad string, lenght int) string {
+	for {
+		str = pad + str
+		if len(str) >= lenght {
+			return str[0:lenght]
+		}
+	}
 }

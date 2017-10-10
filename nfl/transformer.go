@@ -3,6 +3,7 @@ package nfl
 import (
 	"github.com/johnmcdnl/nfl-rank/sports"
 	"fmt"
+	"time"
 )
 
 func Transform(scoreStrips []*ScoreStrip) []*sports.Season {
@@ -55,8 +56,16 @@ func addGameToSeason(season *sports.Season, game *Game, weekNum string) {
 }
 
 func addGameToPhase(season *sports.Season, phaseName string, game *Game, weekNum string) {
+
+	eventTime, err := time.Parse("20060102", string([]byte(game.EventID)[0:8]))
+	if err != nil {
+		panic(err)
+	}
+	isCompleted := eventTime.Before(time.Now())
+
 	season.GetPhaseNamed(phaseName).GetGameWeekNamed(weekNum, game.GameType).NewMatch(&sports.Match{
-		Name: game.EventID,
+		Name:        game.EventID,
+		IsCompleted: isCompleted,
 		HomeTeam: &sports.Team{
 			Name:     game.Home,
 			NickName: game.HomeNickName,
