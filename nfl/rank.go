@@ -21,6 +21,42 @@ func CalculateELOForSeasons(seasons []*sports.Season) {
 	}
 }
 
+func validTeams() []string {
+	var teams []string
+	teams = append(teams, "patriots")
+	teams = append(teams, "chiefs")
+	teams = append(teams, "broncos")
+	teams = append(teams, "packers")
+	teams = append(teams, "seahawks")
+	teams = append(teams, "steelers")
+	teams = append(teams, "panthers")
+	teams = append(teams, "falcons")
+	teams = append(teams, "cardinals")
+	teams = append(teams, "cowboys")
+	teams = append(teams, "eagles")
+	teams = append(teams, "lions")
+	teams = append(teams, "bengals")
+	teams = append(teams, "vikings")
+	teams = append(teams, "colts")
+	teams = append(teams, "dolphins")
+	teams = append(teams, "texans")
+	teams = append(teams, "ravens")
+	teams = append(teams, "saints")
+	teams = append(teams, "bills")
+	teams = append(teams, "raiders")
+	teams = append(teams, "redskins")
+	teams = append(teams, "jets")
+	teams = append(teams, "giants")
+	teams = append(teams, "buccaneers")
+	teams = append(teams, "rams")
+	teams = append(teams, "titans")
+	teams = append(teams, "chargers")
+	teams = append(teams, "49ers")
+	teams = append(teams, "bears")
+	teams = append(teams, "jaguars")
+	teams = append(teams, "browns")
+}
+
 func ReportELOs() {
 
 	n := map[float64][]string{}
@@ -33,8 +69,8 @@ func ReportELOs() {
 	}
 	sort.Sort(sort.Reverse(sort.Float64Slice(a)))
 	for _, k := range a {
-		for _, s := range n[k] {
-			fmt.Printf("%s %f\n", s, k)
+		for i, s := range n[k] {
+			fmt.Printf("%d : %s %f\n", i, s, k)
 		}
 	}
 
