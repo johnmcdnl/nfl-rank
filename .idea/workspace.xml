@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="416cd284-40f8-42eb-a23b-d3d7bd130c1e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nfl-data.db" afterPath="$PROJECT_DIR$/nfl-data.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/john.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/john.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nfl/rank.go" afterPath="$PROJECT_DIR$/nfl/rank.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sports/match.go" afterPath="$PROJECT_DIR$/sports/match.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,12 +24,26 @@
       <file leaf-file-name="rank.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nfl/rank.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="30" column="52" lean-forward="false" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
+            <state relative-caret-position="624">
+              <caret line="123" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
               <folding>
                 <element signature="e#13#117#0" expanded="true" />
                 <element signature="n#!!block;n#CalculateELOForSeasons#0" expanded="false" />
+                <element signature="n#!!block;n#currentTeam#0" expanded="false" />
+                <element signature="n#!!block;n#ReportELOs#0" expanded="false" />
+                <element signature="n#!!block;n#getCurrentRank#0" expanded="false" />
+                <element signature="n#!!block;n#CalculateELO#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="match.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sports/match.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -53,6 +67,7 @@
       <find>int</find>
       <find>par</find>
       <find>k</find>
+      <find>calc</find>
     </findStrings>
   </component>
   <component name="GOROOT" path="C:\Go" />
@@ -78,7 +93,6 @@
         <option value="$PROJECT_DIR$/sports/game.go" />
         <option value="$PROJECT_DIR$/sports/team.go" />
         <option value="$PROJECT_DIR$/sports/result.go" />
-        <option value="$PROJECT_DIR$/sports/match.go" />
         <option value="$PROJECT_DIR$/scraper/scraper.go" />
         <option value="$PROJECT_DIR$/cmd/main.go" />
         <option value="$PROJECT_DIR$/data/nfl/2008/PRE/02.xml" />
@@ -99,6 +113,7 @@
         <option value="$PROJECT_DIR$/cmd/nfl/main.go" />
         <option value="$PROJECT_DIR$/nfl/scraper.go" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/sports/match.go" />
         <option value="$PROJECT_DIR$/nfl/rank.go" />
       </list>
     </option>
@@ -463,14 +478,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sports/match.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cmd/nfl/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -513,13 +520,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nfl/rank.go">
+    <entry file="file://$PROJECT_DIR$/sports/match.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
-          <caret line="30" column="52" lean-forward="false" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nfl/rank.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="123" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
           <folding>
             <element signature="e#13#117#0" expanded="true" />
             <element signature="n#!!block;n#CalculateELOForSeasons#0" expanded="false" />
+            <element signature="n#!!block;n#currentTeam#0" expanded="false" />
+            <element signature="n#!!block;n#ReportELOs#0" expanded="false" />
+            <element signature="n#!!block;n#getCurrentRank#0" expanded="false" />
+            <element signature="n#!!block;n#CalculateELO#0" expanded="false" />
           </folding>
         </state>
       </provider>

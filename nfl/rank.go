@@ -9,13 +9,28 @@ import (
 )
 
 const initialRating float64 = 1500
+const kFactor float64 = 32
 
 func CalculateELOForSeasons(seasons []*sports.Season) {
 	for _, season := range seasons {
 		for _, phase := range season.Phases {
+
 			for _, gameWeek := range phase.GameWeeks {
 				for _, match := range gameWeek.Matches {
+					switch phase.Name {
+					case PreSeason:
+						match.WeightingFactor = 0.3
+					case RegularSeason:
+						match.WeightingFactor = 1.4
+					case PostSeason:
+						match.WeightingFactor = 1.7
+					}
+
 					CalculateELO(match)
+				}
+				if season.Name == "2016" || season.Name == "2017" {
+					fmt.Println(gameWeek.Name, "patriots: ", rankings["patriots"])
+					fmt.Println(gameWeek.Name, "panthers: ", rankings["panthers"])
 				}
 			}
 		}
@@ -63,7 +78,7 @@ func ReportELOs() {
 			if !currentTeam(n) {
 				continue
 			}
-			fmt.Printf("%2.0f : %.2f %s \n", float64(currentRank), r, n)
+			fmt.Printf("%2.0f : %.2f : %s \n", float64(currentRank), r, n)
 			currentRank++
 		}
 	}
@@ -91,11 +106,11 @@ func CalculateELO(match *sports.Match) {
 	default:
 		panic("Unhandled exception")
 	case sports.HomeWin:
-		result, err = elo.New(homeRank, awayRank, 24, elo.Win, elo.Loose)
+		result, err = elo.New(homeRank, awayRank, kFactor*match.WeightingFactor, elo.Win, elo.Loose)
 	case sports.AwayWin:
-		result, err = elo.New(homeRank, awayRank, 24, elo.Loose, elo.Win)
+		result, err = elo.New(homeRank, awayRank, kFactor*match.WeightingFactor, elo.Loose, elo.Win)
 	case sports.Draw:
-		result, err = elo.New(homeRank, awayRank, 24, elo.Draw, elo.Draw)
+		result, err = elo.New(homeRank, awayRank, kFactor*match.WeightingFactor, elo.Draw, elo.Draw)
 	}
 
 	if err != nil {

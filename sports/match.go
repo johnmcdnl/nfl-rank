@@ -1,10 +1,11 @@
 package sports
 
 type Match struct {
-	ID       string
-	Name     string
-	HomeTeam *Team
-	AwayTeam *Team
+	ID              string
+	Name            string
+	HomeTeam        *Team
+	AwayTeam        *Team
+	WeightingFactor float64
 }
 
 func (m *Match) Winner() Result {
