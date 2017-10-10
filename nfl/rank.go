@@ -5,6 +5,7 @@ import (
 	"github.com/johnmcdnl/nfl-rank/sports"
 	"github.com/johnmcdnl/elo"
 	"sort"
+	"strings"
 )
 
 const initialRating float64 = 1500
@@ -21,56 +22,49 @@ func CalculateELOForSeasons(seasons []*sports.Season) {
 	}
 }
 
-func validTeams() []string {
-	var teams []string
-	teams = append(teams, "patriots")
-	teams = append(teams, "chiefs")
-	teams = append(teams, "broncos")
-	teams = append(teams, "packers")
-	teams = append(teams, "seahawks")
-	teams = append(teams, "steelers")
-	teams = append(teams, "panthers")
-	teams = append(teams, "falcons")
-	teams = append(teams, "cardinals")
-	teams = append(teams, "cowboys")
-	teams = append(teams, "eagles")
-	teams = append(teams, "lions")
-	teams = append(teams, "bengals")
-	teams = append(teams, "vikings")
-	teams = append(teams, "colts")
-	teams = append(teams, "dolphins")
-	teams = append(teams, "texans")
-	teams = append(teams, "ravens")
-	teams = append(teams, "saints")
-	teams = append(teams, "bills")
-	teams = append(teams, "raiders")
-	teams = append(teams, "redskins")
-	teams = append(teams, "jets")
-	teams = append(teams, "giants")
-	teams = append(teams, "buccaneers")
-	teams = append(teams, "rams")
-	teams = append(teams, "titans")
-	teams = append(teams, "chargers")
-	teams = append(teams, "49ers")
-	teams = append(teams, "bears")
-	teams = append(teams, "jaguars")
-	teams = append(teams, "browns")
+func currentTeam(name string) bool {
+	switch strings.ToLower(name) {
+	default:
+		return false
+	case "patriots", "dolphins", "jets", "bills":
+		return true
+	case "chiefs", "broncos", "raiders", "chargers":
+		return true
+	case "steelers", "ravens", "browns", "bengals":
+		return true
+	case "texans", "colts", "titans", "jaguars":
+		return true
+	case "cowboys", "eagles", "giants", "redskins":
+		return true
+	case "seahawks", "cardinals", "rams", "49ers":
+		return true
+	case "packers", "lions", "vikings", "bears":
+		return true
+	case "panthers", "falcons", "saints", "buccaneers":
+		return true
+	}
 }
 
 func ReportELOs() {
 
 	n := map[float64][]string{}
-	var a []float64
+	var sorted []float64
 	for k, v := range rankings {
 		n[v] = append(n[v], k)
 	}
 	for k := range n {
-		a = append(a, k)
+		sorted = append(sorted, k)
 	}
-	sort.Sort(sort.Reverse(sort.Float64Slice(a)))
-	for _, k := range a {
-		for i, s := range n[k] {
-			fmt.Printf("%d : %s %f\n", i, s, k)
+
+	var currentRank = 1
+	sort.Sort(sort.Reverse(sort.Float64Slice(sorted)))
+	for _, r := range sorted {
+		for _, n := range n[r] {
+			if !currentTeam(n) {
+				continue
+			}
+			fmt.Printf("%2.0f : %.2f %s \n", float64(currentRank), r, n)
+			currentRank++
 		}
 	}
 
