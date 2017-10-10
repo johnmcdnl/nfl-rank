@@ -21,9 +21,9 @@ func CalculateELOForSeasons(seasons []*sports.Season) {
 					case PreSeason:
 						match.WeightingFactor = 0.3
 					case RegularSeason:
-						match.WeightingFactor = 1.4
+						match.WeightingFactor = 1
 					case PostSeason:
-						match.WeightingFactor = 1.7
+						match.WeightingFactor = 1.2
 					}
 
 					CalculateELO(match)
