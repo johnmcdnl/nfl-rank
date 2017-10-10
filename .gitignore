@@ -2,3 +2,4 @@
 /data
 *.exe
 *.csv
+nfl-data.db

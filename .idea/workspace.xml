@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="416cd284-40f8-42eb-a23b-d3d7bd130c1e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/elo/elo.go" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmd/nfl/main.go" afterPath="$PROJECT_DIR$/cmd/nfl/main.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nfl/rank.go" afterPath="$PROJECT_DIR$/nfl/rank.go" />
@@ -23,27 +23,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="scraper.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scraper.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nfl/scraper.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="88" column="5" lean-forward="true" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
+            <state relative-caret-position="253">
+              <caret line="90" column="57" lean-forward="false" selection-start-line="90" selection-start-column="57" selection-end-line="90" selection-end-column="57" />
               <folding>
-                <element signature="e#13#120#0" expanded="true" />
                 <element signature="n#!!block;n#deleteRecord#0" expanded="false" />
-                <element signature="e#1478#1870#0" expanded="false" />
-                <element signature="n#!!block;n#downloadAll#0" expanded="false" />
+                <element signature="e#1348#1501#0" expanded="false" />
+                <element signature="e#1429#1448#0" expanded="false" />
+                <element signature="e#1515#1532#0" expanded="false" />
+                <element signature="e#2445#2495#0" expanded="false" />
                 <element signature="n#!!block;n#name#0" expanded="false" />
+                <element signature="e#3233#3273#0" expanded="false" />
+                <element signature="e#3555#3572#0" expanded="false" />
+                <element signature="n#!!block;n#download#0" expanded="false" />
+                <element signature="e#3834#3851#0" expanded="false" />
+                <element signature="e#3932#3949#0" expanded="false" />
+                <element signature="n#!!block;n#write#0" expanded="false" />
+                <element signature="e#4110#4327#0" expanded="false" />
+                <element signature="e#4191#4210#0" expanded="false" />
+                <element signature="e#4341#4358#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scoreStrip.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nfl/scoreStrip.go">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state relative-caret-position="104">
+              <caret line="4" column="11" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="transformer.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nfl/transformer.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="7" column="58" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -53,19 +73,31 @@
         <entry file="file://$PROJECT_DIR$/cmd/nfl/main.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="208">
-              <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+              <caret line="8" column="14" lean-forward="false" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
               <folding>
-                <element signature="e#14#68#0" expanded="true" />
+                <element signature="e#14#61#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tunny.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../jeffail/tunny/tunny.go">
+      <file leaf-file-name="rank.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nfl/rank.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4342">
-              <caret line="175" column="9" lean-forward="false" selection-start-line="175" selection-start-column="9" selection-end-line="175" selection-end-column="24" />
+            <state relative-caret-position="208">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding>
+                <element signature="e#13#106#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="match.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sports/match.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -88,6 +120,8 @@
       <find>POST</find>
       <find>NewMat</find>
       <find>int</find>
+      <find>par</find>
+      <find>k</find>
     </findStrings>
   </component>
   <component name="GOROOT" path="C:\Go" />
@@ -131,10 +165,10 @@
         <option value="$PROJECT_DIR$/sports/phase.go" />
         <option value="$PROJECT_DIR$/elo/elo_test.go" />
         <option value="$PROJECT_DIR$/elo/elo.go" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/nfl/rank.go" />
         <option value="$PROJECT_DIR$/cmd/nfl/main.go" />
+        <option value="$PROJECT_DIR$/nfl/rank.go" />
         <option value="$PROJECT_DIR$/nfl/scraper.go" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -181,6 +215,11 @@
               <item name="nfl-rank" type="b2602c69:ProjectViewProjectNode" />
               <item name="nfl-rank" type="462c0819:PsiDirectoryNode" />
               <item name="cmd" type="462c0819:PsiDirectoryNode" />
+              <item name="nfl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nfl-rank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nfl-rank" type="462c0819:PsiDirectoryNode" />
               <item name="nfl" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -299,6 +338,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17838125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31753033" sideWeight="0.5063898" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -308,7 +348,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -368,7 +407,7 @@
         <state relative-caret-position="130">
           <caret line="5" column="16" lean-forward="false" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
           <folding>
-            <element signature="e#14#68#0" expanded="true" />
+            <element signature="e#14#61#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -409,28 +448,7 @@
     <entry file="file://$PROJECT_DIR$/seasons.json" />
     <entry file="file://$PROJECT_DIR$/seasonPhases.json" />
     <entry file="file://$PROJECT_DIR$/scoreStrips.json" />
-    <entry file="file://$PROJECT_DIR$/sports/season.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/season.json" />
-    <entry file="file://$PROJECT_DIR$/sports/gameweek.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2" column="9" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nfl/transformer.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1404">
-          <caret line="57" column="50" lean-forward="false" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sports/phase.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
@@ -446,35 +464,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sports/match.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="3" column="5" lean-forward="true" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/elo/elo.go" />
-    <entry file="file://$PROJECT_DIR$/../elo/elo.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="34" column="13" lean-forward="false" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nfl/rank.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="23" column="43" lean-forward="false" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../jeffail/tunny/tunny.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4342">
@@ -491,16 +481,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmd/nfl/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-          <folding>
-            <element signature="e#14#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nfl/scoreStrip.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
@@ -509,17 +489,106 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sports/season.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
+          <folding>
+            <element signature="e#29#58#0" expanded="false" />
+            <element signature="n#!!block;n#GetSeasonNamed#0" expanded="false" />
+            <element signature="e#162#214#0" expanded="false" />
+            <element signature="e#189#211#0" expanded="false" />
+            <element signature="e#363#420#0" expanded="false" />
+            <element signature="n#!!block;n#SortPhases#0" expanded="false" />
+            <element signature="e#537#592#0" expanded="false" />
+            <element signature="n#!!block;n#GetPhaseNamed#0" expanded="false" />
+            <element signature="e#716#766#0" expanded="false" />
+            <element signature="e#742#763#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sports/gameweek.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nfl/transformer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="7" column="58" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../elo/elo.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sports/match.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/nfl/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="8" column="14" lean-forward="false" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+          <folding>
+            <element signature="e#14#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nfl/rank.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#13#106#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nfl/scraper.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="88" column="5" lean-forward="true" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
+        <state relative-caret-position="253">
+          <caret line="90" column="57" lean-forward="false" selection-start-line="90" selection-start-column="57" selection-end-line="90" selection-end-column="57" />
           <folding>
-            <element signature="e#13#120#0" expanded="true" />
             <element signature="n#!!block;n#deleteRecord#0" expanded="false" />
-            <element signature="e#1478#1870#0" expanded="false" />
-            <element signature="n#!!block;n#downloadAll#0" expanded="false" />
+            <element signature="e#1348#1501#0" expanded="false" />
+            <element signature="e#1429#1448#0" expanded="false" />
+            <element signature="e#1515#1532#0" expanded="false" />
+            <element signature="e#2445#2495#0" expanded="false" />
             <element signature="n#!!block;n#name#0" expanded="false" />
+            <element signature="e#3233#3273#0" expanded="false" />
+            <element signature="e#3555#3572#0" expanded="false" />
+            <element signature="n#!!block;n#download#0" expanded="false" />
+            <element signature="e#3834#3851#0" expanded="false" />
+            <element signature="e#3932#3949#0" expanded="false" />
+            <element signature="n#!!block;n#write#0" expanded="false" />
+            <element signature="e#4110#4327#0" expanded="false" />
+            <element signature="e#4191#4210#0" expanded="false" />
+            <element signature="e#4341#4358#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="4" column="11" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>

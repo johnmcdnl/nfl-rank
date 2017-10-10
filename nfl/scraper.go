@@ -7,16 +7,17 @@ import (
 	"github.com/boltdb/bolt"
 	"time"
 	"encoding/xml"
-	"sync"
 	"log"
 )
 
 const (
 	firstSeason = 1900
-	lastSeason  = 2016
+	lastSeason  = 2017
 
 	firstWeek = 0
 	lastWeek  = 30
+
+	currentWeek = 5
 
 	PreSeason     = "PRE"
 	RegularSeason = "REG"
@@ -39,9 +40,19 @@ func ScrapeAll() []*ScoreStrip {
 
 	var dbCOnn DB
 	dbCOnn.DB = db
-
-	//downloadAll(&dbCOnn)
+	setup(&dbCOnn)
+	downloadAll(&dbCOnn)
 	return parseAll(&dbCOnn)
+}
+
+func setup(db *DB) {
+	err := db.DB.Update(func(tx *bolt.Tx) error {
+		_, err := tx.CreateBucketIfNotExists([]byte(nflRawXML))
+		return err
+	})
+	if err != nil {
+		panic(err)
+	}
 }
 
 func parse(db *DB, season int, phase string, week int) *ScoreStrip {
@@ -51,6 +62,7 @@ func parse(db *DB, season int, phase string, week int) *ScoreStrip {
 		data := bucket.Get(name(season, phase, week))
 		return xml.Unmarshal(data, &s.GameWeek)
 	}); err != nil {
+		deleteRecord(db, season, phase, week)
 		panic(err)
 	}
 	return &s
@@ -73,43 +85,64 @@ func parseAll(dbCOnn *DB) []*ScoreStrip {
 	var scoreStrips []*ScoreStrip
 	for season := firstSeason; season <= lastSeason; season++ {
 		for week := firstWeek; week <= lastWeek; week++ {
-			ss := parse(dbCOnn, season, PreSeason, week)
+			if season == 2017 {
+				ss := parse(dbCOnn, season, PreSeason, week)
+				if ss.GameWeek.Games != nil {
+					scoreStrips = append(scoreStrips, ss)
+				}
+
+				if week <= currentWeek {
+					ss := parse(dbCOnn, season, RegularSeason, week)
+					if ss.GameWeek.Games != nil {
+						scoreStrips = append(scoreStrips, ss)
+					}
+				}
+				continue
+			}
+			//ss := parse(dbCOnn, season, PreSeason, week)
+			//if ss.GameWeek.Games != nil {
+			//	scoreStrips = append(scoreStrips, ss)
+			//}
+
+			ss := parse(dbCOnn, season, RegularSeason, week)
 			if ss.GameWeek.Games != nil {
 				scoreStrips = append(scoreStrips, ss)
 			}
-			ss = parse(dbCOnn, season, RegularSeason, week)
-			if ss.GameWeek.Games != nil {
-				scoreStrips = append(scoreStrips, ss)
+
+			if season != 2017 {
+				ss = parse(dbCOnn, season, PostSeason, week)
+				if ss.GameWeek.Games != nil {
+					scoreStrips = append(scoreStrips, ss)
+				}
 			}
-			ss = parse(dbCOnn, season, PostSeason, week)
-			if ss.GameWeek.Games != nil {
-				scoreStrips = append(scoreStrips, ss)
-			}
+
 		}
 	}
 	return scoreStrips
 }
 
 func downloadAll(dbCOnn *DB) {
-	var wg sync.WaitGroup
 	for season := firstSeason; season <= lastSeason; season++ {
-		fmt.Println("SEASON: ", season)
 		for week := firstWeek; week <= lastWeek; week++ {
-			wg.Add(3)
-			scrape(dbCOnn, &wg, season, PreSeason, week)
-			scrape(dbCOnn, &wg, season, RegularSeason, week)
-			scrape(dbCOnn, &wg, season, PostSeason, week)
+			if season == 2017 {
+				scrape(dbCOnn, season, PreSeason, week)
+				if week <= currentWeek {
+					scrape(dbCOnn, season, RegularSeason, week)
+				}
+				continue
+			}
+			scrape(dbCOnn, season, PreSeason, week)
+			scrape(dbCOnn, season, RegularSeason, week)
+			scrape(dbCOnn, season, PostSeason, week)
 		}
 	}
-	wg.Wait()
 }
 
 func name(season int, phase string, week int) []byte {
 	return []byte(fmt.Sprintf("%d_%s_%d", season, phase, week))
 }
 
-func scrape(db *DB, wg *sync.WaitGroup, season int, phase string, week int) *ScoreStrip {
-	defer wg.Done()
+func scrape(db *DB, season int, phase string, week int) *ScoreStrip {
 	var s ScoreStrip
 	if !exists(db, season, phase, week) {
 		download(db, season, phase, week)
@@ -119,11 +152,8 @@ func scrape(db *DB, wg *sync.WaitGroup, season int, phase string, week int) *Sco
 
 func exists(db *DB, season int, phase string, week int) bool {
 	var found bool
-	err := db.DB.Update(func(tx *bolt.Tx) error {
-		bucket, err := tx.CreateBucketIfNotExists([]byte(nflRawXML))
-		if err != nil {
-			return err
-		}
+	err := db.DB.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte(nflRawXML))
 		data := bucket.Get(name(season, phase, week))
 		found = data != nil
 		return nil
