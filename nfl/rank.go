@@ -9,7 +9,7 @@ import (
 )
 
 const initialRating float64 = 1500
-const kFactor float64 = 32
+const kFactor float64 = 60
 
 func CalculateELOForSeasons(seasons []*sports.Season) {
 	for _, season := range seasons {
@@ -21,16 +21,12 @@ func CalculateELOForSeasons(seasons []*sports.Season) {
 					case PreSeason:
 						match.WeightingFactor = 0.3
 					case RegularSeason:
-						match.WeightingFactor = 1
+						match.WeightingFactor = 1.1
 					case PostSeason:
 						match.WeightingFactor = 1.2
 					}
 
 					CalculateELO(match)
-				}
-				if season.Name == "2016" || season.Name == "2017" {
-					fmt.Println(gameWeek.Name, "patriots: ", rankings["patriots"])
-					fmt.Println(gameWeek.Name, "panthers: ", rankings["panthers"])
 				}
 			}
 		}
