@@ -126,9 +126,7 @@ func downloadAll(dbCOnn *DB) {
 		for week := firstWeek; week <= lastWeek; week++ {
 			if season == 2017 {
 				scrape(dbCOnn, season, PreSeason, week)
-				if week <= currentWeek {
-					scrape(dbCOnn, season, RegularSeason, week)
-				}
+				scrape(dbCOnn, season, RegularSeason, week)
 				continue
 			}
 			scrape(dbCOnn, season, PreSeason, week)
