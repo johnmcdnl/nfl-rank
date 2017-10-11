@@ -17,8 +17,6 @@ const (
 	firstWeek = 0
 	lastWeek  = 30
 
-	currentWeek = 5
-
 	PreSeason     = "PRE"
 	RegularSeason = "REG"
 	PostSeason    = "POST"

@@ -12,4 +12,5 @@ func main() {
 	fmt.Println()
 	fmt.Println()
 	nfl.FuturePredictions(seasons)
+	//nfl.EstimationBestValues(seasons)
 }

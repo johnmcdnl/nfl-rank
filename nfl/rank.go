@@ -10,7 +10,11 @@ import (
 )
 
 const initialRating float64 = 1500
-const kFactor float64 = 60
+
+var KFactor float64 = 75
+var HomeAdvantage float64 = 40
+
+var homeWins, awayWins, draws int
 
 func CalculateELOForSeasons(seasons []*sports.Season) {
 	for _, season := range seasons {
@@ -35,15 +39,35 @@ func CalculateELOForSeasons(seasons []*sports.Season) {
 	}
 }
 
+var modelCorrect, modelInCorrect int
+
+func Accuracy() float64 {
+	return float64(modelCorrect) / (float64(modelCorrect) + float64(modelInCorrect))
+}
+
+func Reset() {
+	modelCorrect = 0
+	modelInCorrect = 0
+	rankings = make(map[string]float64)
+}
+
+func homeFieldAdvantageStats() {
+	total := homeWins + awayWins + draws
+	homeFieldAdvantage := float64(homeWins) / (float64(homeWins) + float64(awayWins))
+	fmt.Printf("Total %d Home %d Away %d Draw %d  Home Field Advtange %2.2f%s \n", total, homeWins, awayWins, draws, homeFieldAdvantage*100, "%")
+}
+
 func FuturePredictions(seasons []*sports.Season) {
-	nextWeekFound := false
+	futurePredictions := 0
 	for _, season := range seasons {
 		for _, phase := range season.Phases {
 			for _, gameWeek := range phase.GameWeeks {
+				var isFutureWeek = false
 				for _, match := range gameWeek.Matches {
 					if match.IsCompleted {
 						continue
 					}
+					isFutureWeek = true
 					switch phase.Name {
 					case PreSeason:
 						match.WeightingFactor = 0.3
@@ -52,16 +76,19 @@ func FuturePredictions(seasons []*sports.Season) {
 					case PostSeason:
 						match.WeightingFactor = 1.2
 					}
-					once.Do(func(){
+					once.Do(func() {
 						fmt.Printf("%s - %s - %s \n", season.Name, phase.Name, gameWeek.Name)
 					})
 					PredictWinner(match)
-					nextWeekFound = true
 				}
 				once = sync.Once{}
-				//if nextWeekFound {
-				//	return
-				//}
+				if isFutureWeek {
+					futurePredictions++
+					return
+				}
+				if futurePredictions > 3 {
+					return
+				}
 			}
 		}
 	}
@@ -128,8 +155,8 @@ func getCurrentRank(name string) float64 {
 }
 
 func CalculateELO(match *sports.Match) {
-	homeRank := getCurrentRank(match.HomeTeam.NickName)
-	awayRank := getCurrentRank(match.AwayTeam.NickName)
+	homeRank := getCurrentRank(match.HomeTeam.NickName) + HomeAdvantage
+	awayRank := getCurrentRank(match.AwayTeam.NickName) - HomeAdvantage
 
 	var result *elo.ELO
 	var err error
@@ -138,11 +165,14 @@ func CalculateELO(match *sports.Match) {
 	default:
 		panic("Unhandled exception")
 	case sports.HomeWin:
-		result, err = elo.New(homeRank, awayRank, kFactor*match.WeightingFactor, elo.Win, elo.Loose)
+		homeWins++
+		result, err = elo.New(homeRank, awayRank, KFactor*match.WeightingFactor, elo.Win, elo.Loose)
 	case sports.AwayWin:
-		result, err = elo.New(homeRank, awayRank, kFactor*match.WeightingFactor, elo.Loose, elo.Win)
+		awayWins++
+		result, err = elo.New(homeRank, awayRank, KFactor*match.WeightingFactor, elo.Loose, elo.Win)
 	case sports.Draw:
-		result, err = elo.New(homeRank, awayRank, kFactor*match.WeightingFactor, elo.Draw, elo.Draw)
+		draws++
+		result, err = elo.New(homeRank, awayRank, KFactor*match.WeightingFactor, elo.Draw, elo.Draw)
 	}
 
 	if err != nil {
@@ -152,25 +182,33 @@ func CalculateELO(match *sports.Match) {
 	rankings[match.HomeTeam.NickName] = result.RAN
 	rankings[match.AwayTeam.NickName] = result.RBN
 
+	if result.EA > result.EB && match.Winner() == sports.HomeWin {
+		modelCorrect++
+	} else if result.EB > result.EA && match.Winner() == sports.AwayWin {
+		modelCorrect++
+	} else {
+		modelInCorrect++
+	}
+
 }
 
 func PredictWinner(match *sports.Match) {
-	homeRank := getCurrentRank(match.HomeTeam.NickName)
-	awayRank := getCurrentRank(match.AwayTeam.NickName)
+	homeRank := getCurrentRank(match.HomeTeam.NickName) + HomeAdvantage
+	awayRank := getCurrentRank(match.AwayTeam.NickName) - HomeAdvantage
 
-	result, err := elo.New(homeRank, awayRank, kFactor*match.WeightingFactor, elo.Win, elo.Loose)
+	result, err := elo.New(homeRank, awayRank, KFactor*match.WeightingFactor, elo.Win, elo.Loose)
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Printf("%2.0f%s \t %s %2.2f @ %2.2f %s \t %2.0f%s \n",
 		result.EB*100, "%",
-		PadLeft(match.AwayTeam.NickName, " ", 10),
+		PadLeft(match.AwayTeam.NickName, " ", 17),
 
 		100/(result.EB*100),
 		100/(result.EA*100),
 
-		PadRight(match.HomeTeam.NickName, " ", 10),
+		PadRight(match.HomeTeam.NickName, " ", 17),
 		result.EA*100, "%",
 	)
 
