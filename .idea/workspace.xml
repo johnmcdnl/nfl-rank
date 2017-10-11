@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="416cd284-40f8-42eb-a23b-d3d7bd130c1e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Dockerfile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nfl/estimations.go" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nfl/estimations_bench_test.go" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/nfl-data.db" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmd/nfl/main.go" afterPath="$PROJECT_DIR$/cmd/nfl/main.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nfl/rank.go" afterPath="$PROJECT_DIR$/nfl/rank.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nfl/scraper.go" afterPath="$PROJECT_DIR$/nfl/scraper.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nfl/transformer.go" afterPath="$PROJECT_DIR$/nfl/transformer.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,98 +19,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="scraper.go" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/nfl/scraper.go">
+      <file leaf-file-name="transformer.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/nfl/transformer.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="125" column="44" lean-forward="true" selection-start-line="125" selection-start-column="44" selection-end-line="125" selection-end-column="44" />
-              <folding>
-                <element signature="n#!!block;n#deleteRecord#0" expanded="false" />
-                <element signature="e#1330#1483#0" expanded="false" />
-                <element signature="e#1411#1430#0" expanded="false" />
-                <element signature="e#1497#1514#0" expanded="false" />
-                <element signature="e#2388#2438#0" expanded="false" />
-                <element signature="n#!!block;n#name#0" expanded="false" />
-                <element signature="e#3140#3180#0" expanded="false" />
-                <element signature="e#3462#3479#0" expanded="false" />
-                <element signature="n#!!block;n#download#0" expanded="false" />
-                <element signature="e#3741#3758#0" expanded="false" />
-                <element signature="e#3839#3856#0" expanded="false" />
-                <element signature="n#!!block;n#write#0" expanded="false" />
-                <element signature="e#4017#4234#0" expanded="false" />
-                <element signature="e#4098#4117#0" expanded="false" />
-                <element signature="e#4248#4265#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cmd/nfl/main.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+            <state relative-caret-position="242">
+              <caret line="63" column="74" lean-forward="false" selection-start-line="63" selection-start-column="74" selection-end-line="63" selection-end-column="74" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rank.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nfl/rank.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-              <folding>
-                <element signature="e#13#125#0" expanded="true" />
-                <element signature="e#1584#2000#0" expanded="false" />
-                <element signature="n#!!block;n#currentTeam#0" expanded="false" />
-                <element signature="n#!!block;n#ReportELOs#0" expanded="false" />
-                <element signature="n#!!block;n#getCurrentRank#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="estimations.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nfl/estimations.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding>
-                <element signature="e#13#70#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="elo.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/github.com/johnmcdnl/elo/elo.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="46" column="25" lean-forward="false" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dockerfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="estimations_bench_test.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nfl/estimations_bench_test.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-              <folding>
-                <element signature="e#13#29#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -185,7 +92,6 @@
         <option value="$PROJECT_DIR$/elo/elo.go" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/sports/match.go" />
-        <option value="$PROJECT_DIR$/nfl/transformer.go" />
         <option value="$PROJECT_DIR$/sports/gameweek.go" />
         <option value="$PROJECT_DIR$/nfl/estimations_bench_test.go" />
         <option value="$PROJECT_DIR$/Dockerfile" />
@@ -194,6 +100,7 @@
         <option value="$PROJECT_DIR$/cmd/nfl/main.go" />
         <option value="$PROJECT_DIR$/nfl/rank.go" />
         <option value="$PROJECT_DIR$/nfl/scraper.go" />
+        <option value="$PROJECT_DIR$/nfl/transformer.go" />
       </list>
     </option>
   </component>
@@ -535,14 +442,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nfl/transformer.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1586">
-          <caret line="65" column="48" lean-forward="false" selection-start-line="65" selection-start-column="48" selection-end-line="65" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../elo/elo.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1274">
@@ -572,7 +471,7 @@
         <state relative-caret-position="182">
           <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
           <folding>
-            <element signature="e#13#29#0" expanded="true" />
+            <element signature="e#13#29#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -585,20 +484,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/github.com/johnmcdnl/elo/elo.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="46" column="25" lean-forward="false" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nfl/estimations.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
-            <element signature="e#13#70#0" expanded="true" />
+            <element signature="e#13#70#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -608,7 +499,7 @@
         <state relative-caret-position="175">
           <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
           <folding>
-            <element signature="e#13#125#0" expanded="true" />
+            <element signature="e#13#125#0" expanded="false" />
             <element signature="e#1584#2000#0" expanded="false" />
             <element signature="n#!!block;n#currentTeam#0" expanded="false" />
             <element signature="n#!!block;n#ReportELOs#0" expanded="false" />
@@ -627,8 +518,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nfl/scraper.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="125" column="44" lean-forward="true" selection-start-line="125" selection-start-column="44" selection-end-line="125" selection-end-column="44" />
+        <state relative-caret-position="340">
+          <caret line="126" column="24" lean-forward="true" selection-start-line="126" selection-start-column="24" selection-end-line="126" selection-end-column="24" />
           <folding>
             <element signature="n#!!block;n#deleteRecord#0" expanded="false" />
             <element signature="e#1330#1483#0" expanded="false" />
@@ -646,6 +537,22 @@
             <element signature="e#4098#4117#0" expanded="false" />
             <element signature="e#4248#4265#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/github.com/johnmcdnl/elo/elo.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nfl/transformer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="63" column="74" lean-forward="false" selection-start-line="63" selection-start-column="74" selection-end-line="63" selection-end-column="74" />
+          <folding />
         </state>
       </provider>
     </entry>
