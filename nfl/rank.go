@@ -51,12 +51,6 @@ func Reset() {
 	rankings = make(map[string]float64)
 }
 
-func homeFieldAdvantageStats() {
-	total := homeWins + awayWins + draws
-	homeFieldAdvantage := float64(homeWins) / (float64(homeWins) + float64(awayWins))
-	fmt.Printf("Total %d Home %d Away %d Draw %d  Home Field Advtange %2.2f%s \n", total, homeWins, awayWins, draws, homeFieldAdvantage*100, "%")
-}
-
 func FuturePredictions(seasons []*sports.Season) {
 	futurePredictions := 0
 	for _, season := range seasons {
@@ -214,20 +208,22 @@ func PredictWinner(match *sports.Match) {
 
 }
 
-func PadRight(str, pad string, lenght int) string {
+func PadRight(str, pad string, length int) string {
 	for {
 		str += pad
-		if len(str) >= lenght {
-			return str[0:lenght]
+		if len(str) >= length {
+			return str[0:length]
 		}
 	}
 }
 
-func PadLeft(str, pad string, lenght int) string {
+func PadLeft(str, pad string, length int) string {
 	for {
 		str = pad + str
-		if len(str) >= lenght {
-			return str[0:lenght]
+		if len(str) >= length {
+			return str[0:length]
 		}
 	}
 }
+
+

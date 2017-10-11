@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="416cd284-40f8-42eb-a23b-d3d7bd130c1e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nfl/transformer.go" afterPath="$PROJECT_DIR$/nfl/transformer.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nfl/rank.go" afterPath="$PROJECT_DIR$/nfl/rank.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,12 +19,79 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="transformer.go" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/nfl/transformer.go">
+      <file leaf-file-name="estimations.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nfl/estimations.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="63" column="74" lean-forward="false" selection-start-line="63" selection-start-column="74" selection-end-line="63" selection-end-column="74" />
+            <state relative-caret-position="372">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rank.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/nfl/rank.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="424">
+              <caret line="226" column="1" lean-forward="true" selection-start-line="226" selection-start-column="1" selection-end-line="226" selection-end-column="1" />
+              <folding>
+                <element signature="n#!!block;n#CalculateELOForSeasons#0" expanded="false" />
+                <element signature="e#343#771#0" expanded="false" />
+                <element signature="e#383#768#0" expanded="false" />
+                <element signature="e#429#764#0" expanded="false" />
+                <element signature="e#474#759#0" expanded="false" />
+                <element signature="e#503#526#0" expanded="false" />
+                <element signature="e#532#728#0" expanded="false" />
+                <element signature="e#557#606#0" expanded="false" />
+                <element signature="e#612#665#0" expanded="false" />
+                <element signature="e#671#721#0" expanded="false" />
+                <element signature="n#!!block;n#Accuracy#0" expanded="false" />
+                <element signature="n#!!block;n#Reset#0" expanded="false" />
+                <element signature="n#!!block;n#FuturePredictions#0" expanded="false" />
+                <element signature="e#1124#1849#0" expanded="false" />
+                <element signature="e#1164#1846#0" expanded="false" />
+                <element signature="e#1210#1842#0" expanded="false" />
+                <element signature="e#1284#1700#0" expanded="false" />
+                <element signature="e#1312#1335#0" expanded="false" />
+                <element signature="e#1366#1562#0" expanded="false" />
+                <element signature="e#1391#1440#0" expanded="false" />
+                <element signature="e#1446#1499#0" expanded="false" />
+                <element signature="e#1505#1555#0" expanded="false" />
+                <element signature="e#1583#1667#0" expanded="false" />
+                <element signature="e#1744#1788#0" expanded="false" />
+                <element signature="e#1818#1837#0" expanded="false" />
+                <element signature="n#!!block;n#currentTeam#0" expanded="false" />
+                <element signature="e#1911#2469#0" expanded="false" />
+                <element signature="e#1943#1966#0" expanded="false" />
+                <element signature="e#1968#2027#0" expanded="false" />
+                <element signature="e#2029#2091#0" expanded="false" />
+                <element signature="e#2093#2154#0" expanded="false" />
+                <element signature="e#2156#2214#0" expanded="false" />
+                <element signature="e#2216#2277#0" expanded="false" />
+                <element signature="e#2279#2339#0" expanded="false" />
+                <element signature="e#2341#2399#0" expanded="false" />
+                <element signature="e#2401#2466#0" expanded="false" />
+                <element signature="n#!!block;n#ReportELOs#0" expanded="false" />
+                <element signature="e#2573#2602#0" expanded="false" />
+                <element signature="e#2621#2654#0" expanded="false" />
+                <element signature="e#2755#2915#0" expanded="false" />
+                <element signature="e#2782#2912#0" expanded="false" />
+                <element signature="e#2806#2825#0" expanded="false" />
+                <element signature="n#!!block;n#getCurrentRank#0" expanded="false" />
+                <element signature="e#3043#3070#0" expanded="false" />
+                <element signature="n#!!block;n#CalculateELO#0" expanded="false" />
+                <element signature="e#3302#3753#0" expanded="false" />
+                <element signature="e#3327#3366#0" expanded="false" />
+                <element signature="e#3368#3496#0" expanded="false" />
+                <element signature="e#3498#3626#0" expanded="false" />
+                <element signature="e#3628#3750#0" expanded="false" />
+                <element signature="e#3770#3787#0" expanded="false" />
+                <element signature="e#3948#3969#0" expanded="false" />
+                <element signature="e#4036#4057#0" expanded="false" />
+                <element signature="e#4063#4086#0" expanded="false" />
+                <element signature="n#!!block;n#PredictWinner#0" expanded="false" />
+                <element signature="e#4382#4399#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,9 +165,9 @@
         <option value="$PROJECT_DIR$/vendor/github.com/johnmcdnl/elo/elo.go" />
         <option value="$PROJECT_DIR$/nfl/estimations.go" />
         <option value="$PROJECT_DIR$/cmd/nfl/main.go" />
-        <option value="$PROJECT_DIR$/nfl/rank.go" />
         <option value="$PROJECT_DIR$/nfl/scraper.go" />
         <option value="$PROJECT_DIR$/nfl/transformer.go" />
+        <option value="$PROJECT_DIR$/nfl/rank.go" />
       </list>
     </option>
   </component>
@@ -137,17 +204,6 @@
             <path>
               <item name="nfl-rank" type="b2602c69:ProjectViewProjectNode" />
               <item name="nfl-rank" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nfl-rank" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nfl-rank" type="462c0819:PsiDirectoryNode" />
-              <item name="cmd" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nfl-rank" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nfl-rank" type="462c0819:PsiDirectoryNode" />
-              <item name="cmd" type="462c0819:PsiDirectoryNode" />
-              <item name="nfl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nfl-rank" type="b2602c69:ProjectViewProjectNode" />
@@ -312,7 +368,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -484,30 +540,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nfl/estimations.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding>
-            <element signature="e#13#70#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nfl/rank.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-          <folding>
-            <element signature="e#13#125#0" expanded="false" />
-            <element signature="e#1584#2000#0" expanded="false" />
-            <element signature="n#!!block;n#currentTeam#0" expanded="false" />
-            <element signature="n#!!block;n#ReportELOs#0" expanded="false" />
-            <element signature="n#!!block;n#getCurrentRank#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cmd/nfl/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
@@ -550,9 +582,82 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nfl/transformer.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="63" column="74" lean-forward="false" selection-start-line="63" selection-start-column="74" selection-end-line="63" selection-end-column="74" />
+        <state relative-caret-position="294">
+          <caret line="65" column="80" lean-forward="true" selection-start-line="65" selection-start-column="80" selection-end-line="65" selection-end-column="80" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nfl/estimations.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nfl/rank.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="226" column="1" lean-forward="true" selection-start-line="226" selection-start-column="1" selection-end-line="226" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!block;n#CalculateELOForSeasons#0" expanded="false" />
+            <element signature="e#343#771#0" expanded="false" />
+            <element signature="e#383#768#0" expanded="false" />
+            <element signature="e#429#764#0" expanded="false" />
+            <element signature="e#474#759#0" expanded="false" />
+            <element signature="e#503#526#0" expanded="false" />
+            <element signature="e#532#728#0" expanded="false" />
+            <element signature="e#557#606#0" expanded="false" />
+            <element signature="e#612#665#0" expanded="false" />
+            <element signature="e#671#721#0" expanded="false" />
+            <element signature="n#!!block;n#Accuracy#0" expanded="false" />
+            <element signature="n#!!block;n#Reset#0" expanded="false" />
+            <element signature="n#!!block;n#FuturePredictions#0" expanded="false" />
+            <element signature="e#1124#1849#0" expanded="false" />
+            <element signature="e#1164#1846#0" expanded="false" />
+            <element signature="e#1210#1842#0" expanded="false" />
+            <element signature="e#1284#1700#0" expanded="false" />
+            <element signature="e#1312#1335#0" expanded="false" />
+            <element signature="e#1366#1562#0" expanded="false" />
+            <element signature="e#1391#1440#0" expanded="false" />
+            <element signature="e#1446#1499#0" expanded="false" />
+            <element signature="e#1505#1555#0" expanded="false" />
+            <element signature="e#1583#1667#0" expanded="false" />
+            <element signature="e#1744#1788#0" expanded="false" />
+            <element signature="e#1818#1837#0" expanded="false" />
+            <element signature="n#!!block;n#currentTeam#0" expanded="false" />
+            <element signature="e#1911#2469#0" expanded="false" />
+            <element signature="e#1943#1966#0" expanded="false" />
+            <element signature="e#1968#2027#0" expanded="false" />
+            <element signature="e#2029#2091#0" expanded="false" />
+            <element signature="e#2093#2154#0" expanded="false" />
+            <element signature="e#2156#2214#0" expanded="false" />
+            <element signature="e#2216#2277#0" expanded="false" />
+            <element signature="e#2279#2339#0" expanded="false" />
+            <element signature="e#2341#2399#0" expanded="false" />
+            <element signature="e#2401#2466#0" expanded="false" />
+            <element signature="n#!!block;n#ReportELOs#0" expanded="false" />
+            <element signature="e#2573#2602#0" expanded="false" />
+            <element signature="e#2621#2654#0" expanded="false" />
+            <element signature="e#2755#2915#0" expanded="false" />
+            <element signature="e#2782#2912#0" expanded="false" />
+            <element signature="e#2806#2825#0" expanded="false" />
+            <element signature="n#!!block;n#getCurrentRank#0" expanded="false" />
+            <element signature="e#3043#3070#0" expanded="false" />
+            <element signature="n#!!block;n#CalculateELO#0" expanded="false" />
+            <element signature="e#3302#3753#0" expanded="false" />
+            <element signature="e#3327#3366#0" expanded="false" />
+            <element signature="e#3368#3496#0" expanded="false" />
+            <element signature="e#3498#3626#0" expanded="false" />
+            <element signature="e#3628#3750#0" expanded="false" />
+            <element signature="e#3770#3787#0" expanded="false" />
+            <element signature="e#3948#3969#0" expanded="false" />
+            <element signature="e#4036#4057#0" expanded="false" />
+            <element signature="e#4063#4086#0" expanded="false" />
+            <element signature="n#!!block;n#PredictWinner#0" expanded="false" />
+            <element signature="e#4382#4399#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
