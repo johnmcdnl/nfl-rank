@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strings"
 	"sync"
+	"github.com/johnmcdnl/statistics"
 )
 
 const initialRating float64 = 1500
@@ -26,16 +27,17 @@ func CalculateELOForSeasons(seasons []*sports.Season) {
 					}
 					switch phase.Name {
 					case PreSeason:
-						match.WeightingFactor = 0.3
+						match.Weight = 0.3
 					case RegularSeason:
-						match.WeightingFactor = 1.1
+						match.Weight = 1.1
 					case PostSeason:
-						match.WeightingFactor = 1.2
+						match.Weight = 1.2
 					}
 					CalculateELO(match)
 				}
 			}
 		}
+		condenseRankings()
 	}
 }
 
@@ -64,11 +66,11 @@ func FuturePredictions(seasons []*sports.Season) {
 					isFutureWeek = true
 					switch phase.Name {
 					case PreSeason:
-						match.WeightingFactor = 0.3
+						match.Weight = 0.3
 					case RegularSeason:
-						match.WeightingFactor = 1.1
+						match.Weight = 1.1
 					case PostSeason:
-						match.WeightingFactor = 1.2
+						match.Weight = 1.2
 					}
 					once.Do(func() {
 						fmt.Printf("%s - %s - %s \n", season.Name, phase.Name, gameWeek.Name)
@@ -160,13 +162,13 @@ func CalculateELO(match *sports.Match) {
 		panic("Unhandled exception")
 	case sports.HomeWin:
 		homeWins++
-		result, err = elo.New(homeRank, awayRank, KFactor*match.WeightingFactor, elo.Win, elo.Loose)
+		result, err = elo.New(homeRank, awayRank, KFactor*match.Weight, elo.Win, elo.Loose)
 	case sports.AwayWin:
 		awayWins++
-		result, err = elo.New(homeRank, awayRank, KFactor*match.WeightingFactor, elo.Loose, elo.Win)
+		result, err = elo.New(homeRank, awayRank, KFactor*match.Weight, elo.Loose, elo.Win)
 	case sports.Draw:
 		draws++
-		result, err = elo.New(homeRank, awayRank, KFactor*match.WeightingFactor, elo.Draw, elo.Draw)
+		result, err = elo.New(homeRank, awayRank, KFactor*match.Weight, elo.Draw, elo.Draw)
 	}
 
 	if err != nil {
@@ -190,7 +192,7 @@ func PredictWinner(match *sports.Match) {
 	homeRank := getCurrentRank(match.HomeTeam.NickName) + HomeAdvantage
 	awayRank := getCurrentRank(match.AwayTeam.NickName) - HomeAdvantage
 
-	result, err := elo.New(homeRank, awayRank, KFactor*match.WeightingFactor, elo.Win, elo.Loose)
+	result, err := elo.New(homeRank, awayRank, KFactor*match.Weight, elo.Win, elo.Loose)
 	if err != nil {
 		panic(err)
 	}
@@ -226,4 +228,54 @@ func PadLeft(str, pad string, length int) string {
 	}
 }
 
+func condenseRankings() {
+	var endOfSeason []float64
+	for n, r := range rankings {
+		if !currentTeam(n) {
+			continue
+		}
+		endOfSeason = append(endOfSeason, r)
+	}
+	mean := statistics.Mean(endOfSeason)
+	stdDev := statistics.StandardDeviationPopulation(endOfSeason)
+	lowerBound := mean - stdDev
+	upperBound := mean + stdDev
 
+
+	var balancePoints float64
+
+	var sumRankings float64
+	for i, eosR := range endOfSeason {
+		if eosR > upperBound {
+			balancePoints += eosR - upperBound
+		}
+		if eosR < lowerBound {
+			balancePoints += lowerBound - eosR
+		}
+		sumRankings+=float64(i+1)
+	}
+
+
+	n := map[float64][]string{}
+	var sorted []float64
+	for k, v := range rankings {
+		n[v] = append(n[v], k)
+	}
+	for k := range n {
+		sorted = append(sorted, k)
+	}
+	sort.Sort(sort.Reverse(sort.Float64Slice(sorted)))
+	for _, r := range sorted {
+		for _, n := range n[r] {
+			if !currentTeam(n) {
+				continue
+			}
+				fmt.Println(n, r )
+
+		}
+	}
+
+
+
+	fmt.Println(mean, stdDev, lowerBound, upperBound, balancePoints, sumRankings)
+}

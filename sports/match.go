@@ -1,12 +1,15 @@
 package sports
 
+import "time"
+
 type Match struct {
-	ID              string
-	Name            string
-	IsCompleted     bool
-	HomeTeam        *Team
-	AwayTeam        *Team
-	WeightingFactor float64
+	ID          string
+	Name        string
+	IsCompleted bool
+	HomeTeam    *Team
+	AwayTeam    *Team
+	Weight      float64
+	Time        time.Time
 }
 
 func (m *Match) Winner() Result {

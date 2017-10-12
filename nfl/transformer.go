@@ -63,6 +63,10 @@ func addGameToPhase(season *sports.Season, phaseName string, game *Game, weekNum
 	}
 	isCompleted := eventTime.Before(time.Now().Add(-24 * time.Hour * 7 * 0))
 
+	t, err := time.Parse("20060102", game.EventID[:8])
+	if err != nil {
+		panic(err)
+	}
 	season.GetPhaseNamed(phaseName).GetGameWeekNamed(weekNum, game.GameType).NewMatch(&sports.Match{
 		Name:        game.EventID,
 		IsCompleted: isCompleted,
@@ -76,5 +80,6 @@ func addGameToPhase(season *sports.Season, phaseName string, game *Game, weekNum
 			NickName: game.VisitorNickName,
 			Score:    game.VisitorScore,
 		},
+		Time: t,
 	})
 }
