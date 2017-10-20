@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/johnmcdnl/nfl-rank/nfl"
+	"fmt"
 )
 
 func main() {
@@ -12,7 +13,7 @@ func main() {
 	//ranker.HomeBias = 30
 	ranker.PerformRanking()
 	ranker.Report()
-
+	fmt.Println(ranker.Accuracy())
 	//var m sports.Match
 	//m.HomeTeam = new(sports.Team)
 	//m.AwayTeam = new(sports.Team)
@@ -27,5 +28,5 @@ func main() {
 	//
 	//ranker.CalculateELO(&m)
 	//ranker.ReportHistorical("eagles")
-	//nfl.EstimationBestValues(seasons)
+	nfl.EstimationBestValues(seasons)
 }

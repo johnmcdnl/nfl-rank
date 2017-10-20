@@ -28,6 +28,9 @@ type Ranker struct {
 	Teams   RankedTeams
 
 	HistoricRanks []*Ranks
+
+	ModelCorrect   int
+	ModelIncorrect int
 }
 
 type RankedTeam struct {
@@ -66,11 +69,11 @@ type WinLossRecord struct {
 func NewRanker(seasons []*sports.Season) *Ranker {
 	return &Ranker{
 		BaseRank: 1500,
-		K:        60,
-		HomeBias: 20,
+		K:        48,
+		HomeBias: 30,
 
 		HighWeight:    1.2,
-		RegularWeight: 1.0,
+		RegularWeight: 1.1,
 		LowWeight:     0.3,
 
 		seasons: seasons,
@@ -181,6 +184,30 @@ func (r *Ranker) CalculateELO(m *sports.Match) {
 
 	home.RankingPoints = hRating + (result.RAN - hRating) - r.HomeBias
 	away.RankingPoints = aRating + (result.RBN - aRating) + r.HomeBias
+
+	switch m.Winner() {
+	default:
+		panic("Unhandled exception")
+	case sports.HomeWin:
+		if result.EA > result.EB {
+			r.ModelCorrect++
+		} else {
+			r.ModelIncorrect++
+		}
+	case sports.AwayWin:
+		if result.EB > result.EA {
+			r.ModelCorrect++
+		} else {
+			r.ModelIncorrect++
+		}
+	case sports.Draw:
+		if result.EA == result.EB {
+			r.ModelCorrect++
+		} else {
+			r.ModelIncorrect++
+		}
+	}
+
 }
 
 func (r *Ranker) Report() {
@@ -215,7 +242,7 @@ func (r *Ranker) Sort() {
 }
 
 func (r *Ranker) Accuracy() float64 {
-	return 0
+	return float64(r.ModelCorrect) / (float64(r.ModelCorrect + r.ModelIncorrect))
 }
 
 func currentTeam(name string) bool {
