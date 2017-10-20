@@ -12,11 +12,11 @@ func EstimationBestValues(seasons []*sports.Season) {
 
 	for k := 0; k <= 200; k++ {
 		for h := 0; h <= 200; h++ {
-			Reset()
-			KFactor = float64(k)
-			HomeAdvantage = float64(h)
-			CalculateELOForSeasons(seasons)
-			a := Accuracy()
+			r := NewRanker(seasons)
+			r.K=float64(k)
+			r.HomeBias= float64(h)
+			r.PerformRanking()
+			a := r.Accuracy()
 			if a > bestEstimation {
 				bestEstimation = a
 				bestEstimationK = k

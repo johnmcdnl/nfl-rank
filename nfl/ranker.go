@@ -120,8 +120,8 @@ func (r *Ranker) RankMatch(m *sports.Match) {
 	r.CalculateELO(m)
 	r.CalculateWinLossForMatch(m)
 
-	r.HistoricRanks = append(r.HistoricRanks, &Ranks{Team: m.HomeTeam, RankingPoints: r.GetTeam(m.HomeTeam).RankingPoints, Time:m.Time},)
-	r.HistoricRanks = append(r.HistoricRanks, &Ranks{Team: m.AwayTeam, RankingPoints: r.GetTeam(m.AwayTeam).RankingPoints, Time:m.Time},)
+	r.HistoricRanks = append(r.HistoricRanks, &Ranks{Team: m.HomeTeam, RankingPoints: r.GetTeam(m.HomeTeam).RankingPoints, Time: m.Time}, )
+	r.HistoricRanks = append(r.HistoricRanks, &Ranks{Team: m.AwayTeam, RankingPoints: r.GetTeam(m.AwayTeam).RankingPoints, Time: m.Time}, )
 }
 
 func (r *Ranker) CalculateWinLossForMatch(m *sports.Match) {
@@ -150,37 +150,37 @@ func (r *Ranker) GetTeam(t *sports.Team) *RankedTeam {
 	return team
 }
 
-func (r *Ranker) CalculateELO(match *sports.Match) {
-	home := r.GetTeam(match.HomeTeam)
-	away := r.GetTeam(match.AwayTeam)
+func (r *Ranker) CalculateELO(m *sports.Match) {
+	home := r.GetTeam(m.HomeTeam)
+	away := r.GetTeam(m.AwayTeam)
 
-	home.RankingPoints += +r.HomeBias
-	away.RankingPoints -= +r.HomeBias
+	hRating := home.RankingPoints
+	aRating := away.RankingPoints
+
+	hBiased := home.RankingPoints + r.HomeBias
+	aBiased := away.RankingPoints - r.HomeBias
+
+	kWeight := r.K * m.Weight
 
 	var result *elo.ELO
 	var err error
 
-	switch match.Winner() {
+	switch m.Winner() {
 	default:
 		panic("Unhandled exception")
 	case sports.HomeWin:
-		homeWins++
-		result, err = elo.New(home.RankingPoints, away.RankingPoints, r.K*match.Weight, elo.Win, elo.Loose)
+		result, err = elo.New(hBiased, aBiased, kWeight, elo.Win, elo.Loose)
 	case sports.AwayWin:
-		awayWins++
-		result, err = elo.New(home.RankingPoints, away.RankingPoints, r.K*match.Weight, elo.Loose, elo.Win)
+		result, err = elo.New(hBiased, aBiased, kWeight, elo.Loose, elo.Win)
 	case sports.Draw:
-		draws++
-		result, err = elo.New(home.RankingPoints, away.RankingPoints, r.K*match.Weight, elo.Draw, elo.Draw)
+		result, err = elo.New(hBiased, aBiased, kWeight, elo.Draw, elo.Draw)
 	}
-
 	if err != nil {
 		panic(err)
 	}
 
-	home.RankingPoints = result.RAN
-	away.RankingPoints = result.RBN
-
+	home.RankingPoints = hRating + (result.RAN - hRating) - r.HomeBias
+	away.RankingPoints = aRating + (result.RBN - aRating) + r.HomeBias
 }
 
 func (r *Ranker) Report() {
@@ -212,4 +212,31 @@ func (wlr WinLossRecord) Percentage() float64 {
 
 func (r *Ranker) Sort() {
 	sort.Slice(r.Teams.Teams, func(i, j int) bool { return r.Teams.Teams[i].RankingPoints > r.Teams.Teams[j].RankingPoints })
+}
+
+func (r *Ranker) Accuracy() float64 {
+	return 0
+}
+
+func currentTeam(name string) bool {
+	switch strings.ToLower(name) {
+	default:
+		return false
+	case "patriots", "dolphins", "jets", "bills":
+		return true
+	case "chiefs", "broncos", "raiders", "chargers":
+		return true
+	case "steelers", "ravens", "browns", "bengals":
+		return true
+	case "texans", "colts", "titans", "jaguars":
+		return true
+	case "cowboys", "eagles", "giants", "redskins":
+		return true
+	case "seahawks", "cardinals", "rams", "49ers":
+		return true
+	case "packers", "lions", "vikings", "bears":
+		return true
+	case "panthers", "falcons", "saints", "buccaneers":
+		return true
+	}
 }

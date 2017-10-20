@@ -2,4 +2,4 @@
 /data
 *.exe
 *.csv
-nfl-data.db
+cmd/nfl/nfl-data.db-old

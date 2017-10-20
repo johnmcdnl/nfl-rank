@@ -8,6 +8,7 @@ import (
 	"time"
 	"encoding/xml"
 	"log"
+	"sync"
 )
 
 const (
@@ -61,7 +62,7 @@ func parse(db *DB, season int, phase string, week int) *ScoreStrip {
 		return xml.Unmarshal(data, &s.GameWeek)
 	}); err != nil {
 		deleteRecord(db, season, phase, week)
-		panic(err)
+		fmt.Println(err)
 	}
 	return &s
 }
@@ -118,19 +119,24 @@ func parseAll(dbCOnn *DB) []*ScoreStrip {
 	return scoreStrips
 }
 
+var scrapeWg sync.WaitGroup
+
 func downloadAll(dbCOnn *DB) {
 	for season := firstSeason; season <= lastSeason; season++ {
 		for week := firstWeek; week <= lastWeek; week++ {
 			if season == 2017 {
+				scrapeWg.Add(2)
 				scrape(dbCOnn, season, PreSeason, week)
 				scrape(dbCOnn, season, RegularSeason, week)
 				continue
 			}
-			scrape(dbCOnn, season, PreSeason, week)
-			scrape(dbCOnn, season, RegularSeason, week)
-			scrape(dbCOnn, season, PostSeason, week)
+			scrapeWg.Add(3)
+			go scrape(dbCOnn, season, PreSeason, week)
+			go scrape(dbCOnn, season, RegularSeason, week)
+			go scrape(dbCOnn, season, PostSeason, week)
 		}
 	}
+	scrapeWg.Wait()
 }
 
 func name(season int, phase string, week int) []byte {
@@ -138,6 +144,7 @@ func name(season int, phase string, week int) []byte {
 }
 
 func scrape(db *DB, season int, phase string, week int) *ScoreStrip {
+	defer scrapeWg.Done()
 	var s ScoreStrip
 	if !exists(db, season, phase, week) {
 		download(db, season, phase, week)
@@ -164,12 +171,12 @@ func download(db *DB, season int, phase string, week int) {
 	const scrapeURLFormat = "http://www.nfl.com/ajax/scorestrip?season=%d&seasonType=%s&week=%d"
 	resp, err := http.Get(fmt.Sprintf(scrapeURLFormat, season, phase, week))
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	write(db, season, phase, week, body)
