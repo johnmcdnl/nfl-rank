@@ -69,12 +69,12 @@ type WinLossRecord struct {
 func NewRanker(seasons []*sports.Season) *Ranker {
 	return &Ranker{
 		BaseRank: 1500,
-		K:        48,
-		HomeBias: 30,
+		K:        55,
+		HomeBias: 35,
 
 		HighWeight:    1.2,
 		RegularWeight: 1.1,
-		LowWeight:     0.3,
+		LowWeight:     0.1,
 
 		seasons: seasons,
 	}
@@ -194,11 +194,13 @@ func (r *Ranker) CalculateELO(m *sports.Match) {
 		} else {
 			r.ModelIncorrect++
 		}
+
 	case sports.AwayWin:
 		if result.EB > result.EA {
 			r.ModelCorrect++
 		} else {
 			r.ModelIncorrect++
+
 		}
 	case sports.Draw:
 		if result.EA == result.EB {
@@ -206,6 +208,7 @@ func (r *Ranker) CalculateELO(m *sports.Match) {
 		} else {
 			r.ModelIncorrect++
 		}
+
 	}
 
 }
