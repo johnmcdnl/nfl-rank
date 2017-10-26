@@ -227,13 +227,23 @@ func (r *Ranker) Report() {
 	}
 }
 
-func (r *Ranker) ReportHistorical(nickname string) {
-
+func (r *Ranker) ReportHistorical(nickname string) []*Ranks {
+	var ranks = []*Ranks{}
 	for _, hr := range r.HistoricRanks {
 		if strings.ToLower(hr.Team.NickName) == strings.ToLower(nickname) {
 			fmt.Println(hr.Time.Format(time.RFC3339), hr.RankingPoints)
+			ranks = append(ranks, hr)
 		}
 	}
+	for _, r := range ranks {
+		fmt.Print(fmt.Sprint(`'`, r.Time, `',`))
+	}
+
+	for _, r := range ranks {
+		fmt.Print(fmt.Sprint(`'`, r.RankingPoints, `','`))
+	}
+
+	return ranks
 }
 func (wlr WinLossRecord) Percentage() float64 {
 	wins := wlr.HomeWins + wlr.AwayWins + ((wlr.HomeDraws + wlr.AwayDraws) / 2)

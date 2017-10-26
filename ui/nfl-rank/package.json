@@ -4,5 +4,24 @@
   "private": false,
   "main": "index.js",
   "author": "John McDonnell",
-  "license": "MIT"
+  "license": "MIT",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "dependencies": {
+    "chart.js": "^2.7.0",
+    "chartjs": "^1.1.1",
+    "global": "^4.3.2",
+    "react": "^16.0.0",
+    "react-chartjs": "^1.1.1",
+    "react-chartjs-2": "^2.6.4",
+    "react-dom": "^16.0.0",
+    "react-scripts": "^1.0.14",
+    "serve": "^6.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }
