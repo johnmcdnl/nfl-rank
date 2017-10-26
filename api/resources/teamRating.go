@@ -7,11 +7,13 @@ import (
 )
 
 type TeamRating struct {
-	Name string `json:"name"`
-	Ranks []struct {
-		Time    time.Time `json:"time"`
-		Ranking float64   `json:"ranking"`
-	} `json:"ranks"`
+	Name  string `json:"name"`
+	Ranks []Rank `json:"ranks"`
+}
+
+type Rank struct {
+	Time    time.Time `json:"time"`
+	Ranking float64   `json:"ranking"`
 }
 
 type TeamRatingResponse struct {

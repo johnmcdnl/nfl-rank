@@ -52,7 +52,7 @@ func main() {
 	})
 
 	r.Route("/team-ratings", func(r chi.Router) {
-		r.Get("/", resources.ListArticles)
+		r.Get("/", resources.ListTeamRatings)
 		r.Route("/{teamID}", func(r chi.Router) {
 			r.Get("/", resources.GetTeamRating)
 		})

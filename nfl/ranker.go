@@ -231,18 +231,9 @@ func (r *Ranker) ReportHistorical(nickname string) []*Ranks {
 	var ranks = []*Ranks{}
 	for _, hr := range r.HistoricRanks {
 		if strings.ToLower(hr.Team.NickName) == strings.ToLower(nickname) {
-			fmt.Println(hr.Time.Format(time.RFC3339), hr.RankingPoints)
 			ranks = append(ranks, hr)
 		}
 	}
-	for _, r := range ranks {
-		fmt.Print(fmt.Sprint(`'`, r.Time, `',`))
-	}
-
-	for _, r := range ranks {
-		fmt.Print(fmt.Sprint(`'`, r.RankingPoints, `','`))
-	}
-
 	return ranks
 }
 func (wlr WinLossRecord) Percentage() float64 {
@@ -280,5 +271,18 @@ func currentTeam(name string) bool {
 		return true
 	case "panthers", "falcons", "saints", "buccaneers":
 		return true
+	}
+}
+
+func CurrentTeams() []string {
+	return []string{
+		"patriots", "dolphins", "jets", "bills",
+		"chiefs", "broncos", "raiders", "chargers",
+		"steelers", "ravens", "browns", "bengals",
+		"texans", "colts", "titans", "jaguars",
+		"cowboys", "eagles", "giants", "redskins",
+		"seahawks", "cardinals", "rams", "49ers",
+		"packers", "lions", "vikings", "bears",
+		"panthers", "falcons", "saints", "buccaneers",
 	}
 }
