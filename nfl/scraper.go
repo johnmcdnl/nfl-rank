@@ -97,12 +97,12 @@ func parseAll(dbCOnn *DB) []*ScoreStrip {
 
 				continue
 			}
-			//ss := parse(dbCOnn, season, PreSeason, week)
-			//if ss.GameWeek.Games != nil {
-			//	scoreStrips = append(scoreStrips, ss)
-			//}
+			ss := parse(dbCOnn, season, PreSeason, week)
+			if ss.GameWeek.Games != nil {
+				scoreStrips = append(scoreStrips, ss)
+			}
 
-			ss := parse(dbCOnn, season, RegularSeason, week)
+			ss = parse(dbCOnn, season, RegularSeason, week)
 			if ss.GameWeek.Games != nil {
 				scoreStrips = append(scoreStrips, ss)
 			}
@@ -177,6 +177,7 @@ func download(db *DB, season int, phase string, week int) {
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Println(err)
+		return
 	}
 
 	write(db, season, phase, week, body)

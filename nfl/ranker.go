@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"math"
 )
 
 type Ranks struct {
@@ -29,8 +30,8 @@ type Ranker struct {
 
 	HistoricRanks []*Ranks
 
-	ModelCorrect   int
-	ModelIncorrect int
+	ModelCorrect   float64
+	ModelIncorrect float64
 }
 
 type RankedTeam struct {
@@ -69,8 +70,8 @@ type WinLossRecord struct {
 func NewRanker(seasons []*sports.Season) *Ranker {
 	return &Ranker{
 		BaseRank: 1500,
-		K:        55,
-		HomeBias: 35,
+		K:        57,
+		HomeBias: 33,
 
 		HighWeight:    1.2,
 		RegularWeight: 1.1,
@@ -165,52 +166,53 @@ func (r *Ranker) CalculateELO(m *sports.Match) {
 
 	kWeight := r.K * m.Weight
 
-	var result *elo.ELO
+	var eloResult *elo.ELO
 	var err error
 
 	switch m.Winner() {
 	default:
 		panic("Unhandled exception")
 	case sports.HomeWin:
-		result, err = elo.New(hBiased, aBiased, kWeight, elo.Win, elo.Loose)
+		eloResult, err = elo.New(hBiased, aBiased, kWeight, elo.Win, elo.Loose)
 	case sports.AwayWin:
-		result, err = elo.New(hBiased, aBiased, kWeight, elo.Loose, elo.Win)
+		eloResult, err = elo.New(hBiased, aBiased, kWeight, elo.Loose, elo.Win)
 	case sports.Draw:
-		result, err = elo.New(hBiased, aBiased, kWeight, elo.Draw, elo.Draw)
+		eloResult, err = elo.New(hBiased, aBiased, kWeight, elo.Draw, elo.Draw)
 	}
 	if err != nil {
 		panic(err)
 	}
 
-	home.RankingPoints = hRating + (result.RAN - hRating) - r.HomeBias
-	away.RankingPoints = aRating + (result.RBN - aRating) + r.HomeBias
+	home.RankingPoints = hRating + (eloResult.RAN - hRating) - r.HomeBias
+	away.RankingPoints = aRating + (eloResult.RBN - aRating) + r.HomeBias
 
+	r.CheckAccuracy(m, eloResult)
+
+}
+
+func (r *Ranker) CheckAccuracy(m *sports.Match, e *elo.ELO) {
 	switch m.Winner() {
 	default:
 		panic("Unhandled exception")
 	case sports.HomeWin:
-		if result.EA > result.EB {
-			r.ModelCorrect++
+		if e.EA > e.EB {
+			r.ModelCorrect += m.Weight
 		} else {
-			r.ModelIncorrect++
+			r.ModelIncorrect += m.Weight
 		}
-
 	case sports.AwayWin:
-		if result.EB > result.EA {
-			r.ModelCorrect++
+		if e.EB > e.EA {
+			r.ModelCorrect += m.Weight
 		} else {
-			r.ModelIncorrect++
-
+			r.ModelIncorrect += m.Weight
 		}
 	case sports.Draw:
-		if result.EA == result.EB {
-			r.ModelCorrect++
+		if math.Abs(e.EA-e.EB) < 5 {
+			r.ModelCorrect += m.Weight
 		} else {
-			r.ModelIncorrect++
+			r.ModelIncorrect += m.Weight
 		}
-
 	}
-
 }
 
 func (r *Ranker) Report() {
@@ -245,7 +247,7 @@ func (r *Ranker) Sort() {
 }
 
 func (r *Ranker) Accuracy() float64 {
-	return float64(r.ModelCorrect) / (float64(r.ModelCorrect + r.ModelIncorrect))
+	return r.ModelCorrect / (r.ModelCorrect + r.ModelIncorrect)
 }
 
 func currentTeam(name string) bool {

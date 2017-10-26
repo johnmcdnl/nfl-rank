@@ -1,0 +1,8 @@
+{
+  "name": "nfl-rank",
+  "version": "0.1.0",
+  "private": false,
+  "main": "index.js",
+  "author": "John McDonnell",
+  "license": "MIT"
+}

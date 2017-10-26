@@ -25,8 +25,8 @@ func main() {
 	//ranker.GetTeam(m.HomeTeam).RankingPoints = 1600
 	//ranker.GetTeam(m.AwayTeam).RankingPoints = 1500
 	//ranker.HomeBias = 0
-	//
+
 	//ranker.CalculateELO(&m)
 	//ranker.ReportHistorical("eagles")
-	nfl.EstimationBestValues(seasons)
+	//nfl.EstimationBestValues(seasons)
 }

@@ -3,3 +3,4 @@
 *.exe
 *.csv
 cmd/nfl/nfl-data.db-old
+/ui/nfl-rank/node_modules/
