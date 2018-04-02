@@ -1,14 +1,15 @@
 package nfl
 
 import (
-	"fmt"
-	"net/http"
-	"io/ioutil"
-	"github.com/boltdb/bolt"
-	"time"
 	"encoding/xml"
+	"fmt"
+	"io/ioutil"
 	"log"
+	"net/http"
 	"sync"
+	"time"
+
+	"github.com/boltdb/bolt"
 )
 
 const (
@@ -84,34 +85,20 @@ func parseAll(dbCOnn *DB) []*ScoreStrip {
 	var scoreStrips []*ScoreStrip
 	for season := firstSeason; season <= lastSeason; season++ {
 		for week := firstWeek; week <= lastWeek; week++ {
-			if season == 2017 {
-				ss := parse(dbCOnn, season, PreSeason, week)
-				if ss.GameWeek.Games != nil {
-					scoreStrips = append(scoreStrips, ss)
-				}
 
-				ss = parse(dbCOnn, season, RegularSeason, week)
-				if ss.GameWeek.Games != nil {
-					scoreStrips = append(scoreStrips, ss)
-				}
-
-				continue
-			}
-			//ss := parse(dbCOnn, season, PreSeason, week)
-			//if ss.GameWeek.Games != nil {
-			//	scoreStrips = append(scoreStrips, ss)
-			//}
-
-			ss := parse(dbCOnn, season, RegularSeason, week)
+			ss := parse(dbCOnn, season, PreSeason, week)
 			if ss.GameWeek.Games != nil {
 				scoreStrips = append(scoreStrips, ss)
 			}
 
-			if season != 2017 {
-				ss = parse(dbCOnn, season, PostSeason, week)
-				if ss.GameWeek.Games != nil {
-					scoreStrips = append(scoreStrips, ss)
-				}
+			ss = parse(dbCOnn, season, RegularSeason, week)
+			if ss.GameWeek.Games != nil {
+				scoreStrips = append(scoreStrips, ss)
+			}
+
+			ss = parse(dbCOnn, season, PostSeason, week)
+			if ss.GameWeek.Games != nil {
+				scoreStrips = append(scoreStrips, ss)
 			}
 
 		}
@@ -124,16 +111,13 @@ var scrapeWg sync.WaitGroup
 func downloadAll(dbCOnn *DB) {
 	for season := firstSeason; season <= lastSeason; season++ {
 		for week := firstWeek; week <= lastWeek; week++ {
-			if season == 2017 {
-				scrapeWg.Add(2)
-				scrape(dbCOnn, season, PreSeason, week)
-				scrape(dbCOnn, season, RegularSeason, week)
-				continue
-			}
 			scrapeWg.Add(3)
 			go scrape(dbCOnn, season, PreSeason, week)
 			go scrape(dbCOnn, season, RegularSeason, week)
 			go scrape(dbCOnn, season, PostSeason, week)
+			if season%3 == 0 {
+				time.Sleep(time.Millisecond * 50)
+			}
 		}
 	}
 	scrapeWg.Wait()
@@ -174,11 +158,11 @@ func download(db *DB, season int, phase string, week int) {
 		log.Println(err)
 	}
 	defer resp.Body.Close()
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Println(err)
 	}
-
 	write(db, season, phase, week, body)
 }
 
